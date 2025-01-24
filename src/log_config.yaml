@@ -1,0 +1,39 @@
+# uvicorn logging configuration file
+# https://www.uvicorn.org/settings/#logging
+
+# Currently this only applies to the Docker containers, local development
+# with the `uv run fastapi dev src/app.py` command will not use this file.
+version: 1
+disable_existing_loggers: False
+formatters:
+  default:
+    "()": uvicorn.logging.DefaultFormatter
+    format: "%(asctime)s\t%(name)s\t%(levelname)s\t%(message)s"
+  access:
+    "()": uvicorn.logging.AccessFormatter
+    format: "%(asctime)s\t%(name)s\t%(levelname)s\t%(message)s"
+handlers:
+  default:
+    formatter: default
+    class: logging.StreamHandler
+    stream: ext://sys.stderr
+  access:
+    formatter: access
+    class: logging.StreamHandler
+    stream: ext://sys.stdout
+loggers:
+  uvicorn.error:
+    level: INFO
+    handlers:
+      - default
+    propagate: no
+  uvicorn.access:
+    level: INFO
+    handlers:
+      - access
+    propagate: no
+  my_application:
+    level: INFO
+    handlers:
+      - default
+    propagate: no

@@ -1,0 +1,22 @@
+# Python
+__pycache__
+*.egg-info
+*.py[cdo]
+.venv
+
+# Git & Github
+.git
+.github
+.gitignore
+
+# IDE
+.vscode
+
+# Coverage outputs
+htmlcov
+.coverage
+
+# Project files
+docs
+Dockerfile
+Makefile
