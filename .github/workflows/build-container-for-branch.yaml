@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   docker:
+    name: Build container for branch
     runs-on: ubuntu-latest
     steps:
       - name: Delete huge unnecessary tools folder # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449

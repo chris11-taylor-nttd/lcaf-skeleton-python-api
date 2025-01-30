@@ -10,6 +10,7 @@ permissions:
 
 jobs:
     draft-release:
+        name: Draft Release
         permissions:
             contents: write
             pull-requests: write
