@@ -10,6 +10,7 @@ permissions:
 
 jobs:
     configure-labels:
+        name: Configure missing labels
         permissions:
             issues: write
         runs-on: ubuntu-latest
@@ -24,6 +25,7 @@ jobs:
                 jq -e 'if map(select(.name | contains ("minor"))) == [] then null else "Label minor exists" end' labels.json || gh label create minor --color "fbca04"
                 jq -e 'if map(select(.name | contains ("major"))) == [] then null else "Label major exists" end' labels.json || gh label create major --color "b60205"
     label-pr:
+        name: Apply labels to pull request
         permissions:
             contents: read
             pull-requests: write

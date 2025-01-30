@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   docker:
+    name: Relase Docker container
     runs-on: ubuntu-latest
     steps:
       - name: Delete huge unnecessary tools folder # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449

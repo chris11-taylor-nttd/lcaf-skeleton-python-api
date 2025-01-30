@@ -8,6 +8,7 @@ name: Cleanup Container for Branch
 
 jobs:
   delete:
+    name: Cleanup container after branch deletion
     outputs:
       output1: ${{ steps.DetermineTagName.outputs.container_tag }}
     if: github.event.ref_type == 'branch'
