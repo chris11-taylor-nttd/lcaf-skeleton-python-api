@@ -1,13 +1,13 @@
 on:
-    release:
-        types:
-          - published
+  push:
+    branches-ignore:
+      - "main"
 
-name: Build and Publish Docker Image
+name: Build Container for Branch
 
 permissions:
-    contents: read
-    packages: write
+  contents: read
+  packages: write
 
 jobs:
   docker:
@@ -27,7 +27,8 @@ jobs:
       - name: Push image
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository }}
-          RELEASE_TAG=$(echo $GITHUB_REF | cut -d / -f 3)
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]') # This changes all uppercase characters to lowercase.
+          RELEASE_TAG=$(echo "${{ github.ref }}" | sed -e 's,refs/[head|tag]*s/,,g' | sed -e 's,/,-,g' | sed -e 's/!/-breaking/g' )
           docker tag pipeline_build $IMAGE_ID:$RELEASE_TAG
           docker push $IMAGE_ID:$RELEASE_TAG
       - name: Cleanup Untagged
